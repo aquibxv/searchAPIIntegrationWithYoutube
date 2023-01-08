@@ -1,6 +1,7 @@
 import requests
 import datetime
 from searchAPI.models import YoutubeVideo
+from searchAPI.APIKeyManager import APIKeyManager
 import logging
 
 logger = logging.getLogger(__name__)
@@ -26,6 +27,9 @@ class YouTubeAPIDataProcessor:
         Returns:
             dict: The JSON response from the API, or `None` if the request failed.
         """
+        if api_key is None:
+            logger.error("Exhausted the qouta for all the availabe API Keys no data will be fetched")
+            raise Exception("No API Keys Availabe Haing Qouta To Fetch Data")
 
         predifined_url = 'https://youtube.googleapis.com/youtube/v3/search?part=snippet&maxResults=50&order=date&publishedAfter={}&q=cricket&type=video&key={}'.format(published_after, api_key)
         logger.info("Requesting data from url : {}".format(predifined_url))
@@ -36,6 +40,9 @@ class YouTubeAPIDataProcessor:
             return api_response.json()
         except:
             logger.error("Error while fetching data from youtube api \n {}".format(api_response.json))
+            if api_response.status_code == 403:
+                api_key_manager = APIKeyManager()
+                api_key = api_key_manager.get_available_api_key()
             return None
     
 
@@ -51,6 +58,7 @@ class YouTubeAPIDataProcessor:
         published_after = published_after.strftime('%Y-%m-%dT%H:%M:%SZ')
 
         logger.info("Calling _get_youtube_videos_data for getting Youtube Videos Data")
+
         youtube_video_data = self._get_youtube_videos_data(api_key, published_after)
 
         if youtube_video_data is not None:
