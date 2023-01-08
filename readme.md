@@ -9,8 +9,7 @@ publishing date-time from YouTube for a given tag/search query in a paginated re
  ### How To Run The Application Manually
   - Create a .env file in the same directory in which settings.py resides.
   - In the .env file creat a variable named API_KEYS and assign your api keys obtained from google developer console
-  - Example `API_KEYS = testAPIKey1,testAPIKey2,testAPIKey3` 
-  - Make sure you are not adding any extra spaces not double qoutes or single qoutes required for it.
+  - Example `API_KEYS = testAPIKey1,testAPIKey2,testAPIKey3`Make sure you are not adding any extra spaces not double qoutes or single qoutes required for it.
   - Create a directory named logs. It should be in the top level directory where requirements.txt and manage.py is residing.
 
   - On windows
