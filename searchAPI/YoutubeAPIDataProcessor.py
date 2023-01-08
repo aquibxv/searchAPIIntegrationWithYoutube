@@ -7,13 +7,7 @@ class YouTubeAPIDataProcessor:
     def _get_youtube_videos_data(self, api_key, published_after):
 
         predifined_url = 'https://youtube.googleapis.com/youtube/v3/search?part=snippet&maxResults=50&order=date&publishedAfter={}&q=cricket&type=video&key={}'.format(published_after, api_key)
-        
-        print(predifined_url)
-
         api_response = requests.get(predifined_url)
-        print("getting data from youtube")
-        print(api_response.json())
-
         try:
             api_response.raise_for_status()
             return api_response.json()
@@ -42,12 +36,9 @@ class YouTubeAPIDataProcessor:
                         channel_tile = item['snippet']['channelTitle'],
                         thumbnail_url = item['snippet']['thumbnails']['default']['url']
                     )
-                    print("before saving data")
                     youtube_video_object.save()
-                    print("after saving data")
                 except Exception as e:
-                    print("Caught Exception")
-                    print(e)
+                    pass
 
 
     

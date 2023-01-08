@@ -6,6 +6,5 @@ class SearchapiConfig(AppConfig):
     name = 'searchAPI'
 
     def ready(self):
-        print("Starting Scheduler")
         from .YoutubeAPIDataProcessingScheduler import YoutubeAPIDataUpdater
         YoutubeAPIDataUpdater.start()

@@ -18,4 +18,8 @@ class YoutubeVideo(models.Model):
     class Meta:
         #using -publishTime as per the requirement wich will make reterival in descending order faster.
         #Adding indexes for title and description for making searching faster using title and description.
-        indexes = [models.Index(fields=['-publish_time', 'title', 'description'])]
+        indexes = [
+            models.Index(fields=['-publish_time']),
+            models.Index(fields=['title']),
+            models.Index(fields=['description'])
+        ]
