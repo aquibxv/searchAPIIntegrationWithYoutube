@@ -27,3 +27,5 @@ publishing date-time from YouTube for a given tag/search query in a paginated re
     - `docker-compose build`
     - `docker-compose up`
 
+## Note : 
+Please make sure you are using the latest version of python prior to running the project
