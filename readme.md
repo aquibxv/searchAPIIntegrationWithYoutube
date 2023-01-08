@@ -22,7 +22,7 @@ publishing date-time from YouTube for a given tag/search query in a paginated re
        - `python3 manage.py migrate`
        - `python3 manage.py runserver --noreload`
 
-### How to Run Using Dcoker
+### How to Run Using Dcoker (Make Sure Docker Is Installed On the Machine)
     - `docker-compose run web python manage.py migrate` 
     - `docker-compose build`
     - `docker-compose up`
