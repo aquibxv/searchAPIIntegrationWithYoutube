@@ -127,3 +127,46 @@ STATIC_URL = 'static/'
 # https://docs.djangoproject.com/en/4.1/ref/settings/#default-auto-field
 
 DEFAULT_AUTO_FIELD = 'django.db.models.BigAutoField'
+
+import os
+from dotenv import load_dotenv
+
+load_dotenv()
+API_KEYS = os.getenv('API_KEYS').split(',')
+
+LOGGING = {
+    'version': 1,
+    'disable_existing_loggers': False,
+    'formatters': {
+        'verbose': {
+            'format': '%(asctime)s %(levelname)s %(name)s %(module)s %(lineno)d %(message)s',
+            'datefmt': '%Y-%m-%d %H:%M:%S',
+        },
+    },
+    'handlers': {
+        'debug_file': {
+            'class': 'logging.FileHandler',
+            'filename': os.path.join(BASE_DIR,'logs', 'debug.log'),
+            'level': 'DEBUG',
+            'formatter': 'verbose',
+        },
+        'info_file': {
+            'class': 'logging.FileHandler',
+            'filename': os.path.join(BASE_DIR, 'logs', 'info.log'),
+            'level': 'INFO',
+            'formatter': 'verbose',
+        },
+        'error_file': {
+            'class': 'logging.FileHandler',
+            'filename': os.path.join(BASE_DIR,'logs', 'error.log'),
+            'level': 'ERROR', 
+            'formatter': 'verbose',
+        },
+    },
+    'loggers': {
+        'django': {
+            'handlers': ['debug_file', 'info_file', 'error_file'],
+            'level': 'DEBUG',
+        },
+    },
+}
